@@ -21,8 +21,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction func guideButtonPressed(_ sender: UIButton) {
-        let item = KSGuideItem(sourceView: sender, text: "What the fuck? What the fuck? What the fuck? What the fuck? What the fuck? What the fuck? What the fuck? What the fuck? ")
-        item.insets = UIEdgeInsets(top: -10, left: -20, bottom: -30, right: -40)
+        let item = KSGuideItem(sourceView: sender, text: "Update cocoapods to the latest version. \nAdd pod 'KSPhotoBrowser' to your Podfile. \nRun pod install or pod update. \nImport KSPhotoBrowser.h.")
+        item.insets = UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)
         let vc = KSGuideViewController(item: item)
         present(vc, animated: true, completion: nil)
     }

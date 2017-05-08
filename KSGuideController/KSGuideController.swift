@@ -39,7 +39,7 @@ class KSGuideViewController: UIViewController {
             } else if center.x > bounds.midX && center.y <= bounds.midY {
                 return .upperRight
             } else if center.x <= bounds.midX && center.y > bounds.midY {
-                return .upperRight
+                return .lowerLeft
             } else {
                 return .lowerRight
             }
@@ -72,7 +72,7 @@ class KSGuideViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading  tthe view.
-        view.backgroundColor = UIColor(white: 0, alpha: 0.6)
+        view.backgroundColor = UIColor(white: 0, alpha: 0.7)
         configViews()
     }
 
@@ -116,8 +116,26 @@ class KSGuideViewController: UIViewController {
             }
             let textRect = CGRect(x: x, y: arrowRect.maxY + gap, width: size.width, height: size.height)
             textLabel.frame = textRect
-        default:
-            break
+        case .lowerLeft:
+            let arrowRect = CGRect(x: hollowFrame.origin.x, y: hollowFrame.minY - gap - imageSize.height, width: imageSize.width, height: imageSize.height)
+            arrowImageView.frame = arrowRect
+            let maxWidth = view.bounds.size.width - hollowFrame.minX - gap
+            let size = item.text.size(font: textLabel.font, maxWidth: maxWidth)
+            let textRect = CGRect(x: hollowFrame.origin.x, y: arrowRect.minY - gap - size.height, width: size.width, height: size.height)
+            textLabel.frame = textRect
+        case .lowerRight:
+            let arrowRect = CGRect(x: hollowFrame.maxX - imageSize.width, y: hollowFrame.minY - gap - imageSize.height, width: imageSize.width, height: imageSize.height)
+            arrowImageView.frame = arrowRect
+            let maxWidth = hollowFrame.maxX - gap
+            let size = item.text.size(font: textLabel.font, maxWidth: maxWidth)
+            var x: CGFloat = 0
+            if size.width < maxWidth {
+                x = hollowFrame.maxX - size.width
+            } else {
+                x = hollowFrame.origin.x
+            }
+            let textRect = CGRect(x: x, y: arrowRect.minY - gap - size.height, width: size.width, height: size.height)
+            textLabel.frame = textRect
         }
         configArrowDirection()
     }
@@ -129,9 +147,9 @@ class KSGuideViewController: UIViewController {
         case .upperRight:
             break
         case .lowerLeft:
-            arrowImageView.transform = CGAffineTransform(scaleX: 1, y: -1)
+            arrowImageView.transform = CGAffineTransform(scaleX: -1, y: -1)
         case .lowerRight:
-            arrowImageView.transform = CGAffineTransform(rotationAngle: .pi * 2)
+            arrowImageView.transform = CGAffineTransform(scaleX: 1, y: -1)
         }
     }
     
