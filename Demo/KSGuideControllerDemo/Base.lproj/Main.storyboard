@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="KSGuideViewControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="KSGuideControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -21,22 +21,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JWd-UG-dil">
-                                <rect key="frame" x="167" y="318" width="41" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7K-xu-Srt">
+                                <rect key="frame" x="167.5" y="318" width="41" height="30"/>
                                 <state key="normal" title="Guide"/>
                                 <connections>
-                                    <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8G3-0M-ogT"/>
+                                    <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kta-Eo-x6a"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="JWd-UG-dil" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="KCE-bv-d1S"/>
-                            <constraint firstItem="JWd-UG-dil" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wx4-tJ-Eg1"/>
+                            <constraint firstItem="F7K-xu-Srt" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fUO-lE-PzH"/>
+                            <constraint firstItem="F7K-xu-Srt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lju-oj-p8t"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="guideButton" destination="JWd-UG-dil" id="9Yf-Ik-DcT"/>
+                        <outlet property="guideButton" destination="F7K-xu-Srt" id="Tdo-Sf-QwD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  KSGuideViewControllerDemo
+//  KSGuideControllerDemo
 //
 //  Created by Kyle Sun on 2017/5/8.
 //  Copyright © 2017年 Kyle Sun. All rights reserved.
@@ -9,8 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var guideButton: UIButton!
 
+    @IBOutlet weak var guideButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -27,6 +28,6 @@ class ViewController: UIViewController {
         let vc = KSGuideViewController(item: item)
         present(vc, animated: true, completion: nil)
     }
-
+    
 }
 
