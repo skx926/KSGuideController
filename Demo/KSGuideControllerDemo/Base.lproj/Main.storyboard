@@ -28,6 +28,38 @@
                                     <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kta-Eo-x6a"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bnl-YI-idv">
+                                <rect key="frame" x="68" y="106" width="41" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Guide"/>
+                                <connections>
+                                    <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9uG-Sw-ddi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEJ-UT-diy">
+                                <rect key="frame" x="31" y="606" width="41" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Guide"/>
+                                <connections>
+                                    <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z1L-qM-VHz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vR7-V3-jUM">
+                                <rect key="frame" x="258" y="126" width="41" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Guide"/>
+                                <connections>
+                                    <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gIS-Uk-J2L"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sd-A5-uDB">
+                                <rect key="frame" x="265" y="499" width="41" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Guide"/>
+                                <connections>
+                                    <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gwI-LU-QJ4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -35,9 +67,6 @@
                             <constraint firstItem="F7K-xu-Srt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lju-oj-p8t"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="guideButton" destination="F7K-xu-Srt" id="Tdo-Sf-QwD"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
