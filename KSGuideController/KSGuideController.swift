@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KSGuideViewController: UIViewController {
+class KSGuideController: UIViewController {
     
     enum Region {
         case upperLeft
@@ -17,20 +17,45 @@ class KSGuideViewController: UIViewController {
         case lowerRight
     }
     
-    var item: KSGuideItem!
-    let arrowImageView = UIImageView()
-    let textLabel = UILabel()
-    let maskLayer = CAShapeLayer()
-    let cornerRadius: CGFloat = 5
-    let gap: CGFloat = 20
+    typealias CompletionBlock = (() -> Void)
     
-    var maskCenter: CGPoint {
+    private var items = [KSGuideItem]()
+    private var currentIndex: Int = 0 {
+        didSet {
+            configViews()
+        }
+    }
+    private var currentItem: KSGuideItem {
+        get {
+            return items[currentIndex]
+        }
+    }
+    private let arrowImageView = UIImageView()
+    private let textLabel = UILabel()
+    private let maskLayer = CAShapeLayer()
+    private var completion: CompletionBlock?
+    
+    public var maskCornerRadius: CGFloat = 5
+    public var backgroundAlpha: CGFloat = 0.7
+    public var spacing: CGFloat = 20
+    public var padding: CGFloat = 50
+    public var maskInsets = UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)
+    public var font = UIFont.systemFont(ofSize: 14)
+    public var textColor = UIColor.white
+    public var arrowColor = UIColor.white
+    public var arrowImageName = "guide_arrow"
+    public var animationDuration = 0.3
+    public var animatedMask = true
+    public var animatedText = false
+    public var animatedArrow = true
+    
+    private var maskCenter: CGPoint {
         get {
             return CGPoint(x: hollowFrame.midX, y: hollowFrame.midY)
         }
     }
     
-    var region: Region {
+    private var region: Region {
         get {
             let center = maskCenter
             let bounds = view.bounds
@@ -46,22 +71,26 @@ class KSGuideViewController: UIViewController {
         }
     }
     
-    var hollowFrame: CGRect {
+    private var hollowFrame: CGRect {
         get {
-            var rect = item.sourceView.frame;
-            rect.origin.x += item.insets.left
-            rect.origin.y += item.insets.top
-            rect.size.width -= item.insets.right + item.insets.left
-            rect.size.height -= item.insets.bottom + item.insets.top
-            return view.convert(rect, from: item.sourceView.superview)
+            var rect = currentItem.sourceView.frame;
+            rect.origin.x += maskInsets.left
+            rect.origin.y += maskInsets.top
+            rect.size.width -= maskInsets.right + maskInsets.left
+            rect.size.height -= maskInsets.bottom + maskInsets.top
+            return view.convert(rect, from: currentItem.sourceView.superview)
         }
     }
     
-    init(item: KSGuideItem) {
+    convenience init(item: KSGuideItem, completion:(() -> ())?) {
+        self.init(items: [item], completion: completion)
+    }
+    
+    init(items: [KSGuideItem], completion:(() -> ())?) {
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .custom
         modalTransitionStyle = .crossDissolve
-        self.item = item
+        self.items.append(contentsOf: items)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -72,7 +101,6 @@ class KSGuideViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading  tthe view.
-        view.backgroundColor = UIColor(white: 0, alpha: 0.7)
         configViews()
     }
     
@@ -81,17 +109,19 @@ class KSGuideViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func configViews() {
+    private func configViews() {
+        view.backgroundColor = UIColor(white: 0, alpha: backgroundAlpha)
+        
         configMask()
         
-        arrowImageView.image = #imageLiteral(resourceName: "guide_arrow")
-        arrowImageView.tintColor = .white
+        arrowImageView.image = UIImage(named: arrowImageName)
+        arrowImageView.tintColor = arrowColor
         view.addSubview(arrowImageView)
         
-        textLabel.textColor = .white
-        textLabel.font = UIFont.systemFont(ofSize: 14)
+        textLabel.textColor = textColor
+        textLabel.font = font
         textLabel.textAlignment = .left
-        textLabel.text = item.text
+        textLabel.text = currentItem.text
         textLabel.numberOfLines = 0
         view.addSubview(textLabel)
         
@@ -99,95 +129,132 @@ class KSGuideViewController: UIViewController {
         var arrowRect: CGRect!
         var transform: CGAffineTransform = .identity
         let imageSize = arrowImageView.image!.size
-        let maxWidth = view.frame.size.width - gap * 2
-        let size = item.text.size(font: textLabel.font, maxWidth: maxWidth)
+        let maxWidth = view.frame.size.width - padding * 2
+        let size = currentItem.text.size(font: textLabel.font, maxWidth: maxWidth)
         switch region {
             
         case .upperLeft:
             transform = CGAffineTransform(scaleX: -1, y: 1)
             arrowRect = CGRect(x: hollowFrame.midX - imageSize.width / 2,
-                               y: hollowFrame.maxY + gap,
+                               y: hollowFrame.maxY + spacing,
                                width: imageSize.width,
                                height: imageSize.height)
             var x: CGFloat = 0
             if size.width < hollowFrame.size.width {
                 x = arrowRect.maxX - size.width / 2
             } else {
-                x = gap
+                x = padding
             }
             textRect = CGRect(x: x,
-                              y: arrowRect.maxY + gap,
+                              y: arrowRect.maxY + spacing,
                               width: size.width,
                               height: size.height)
             
         case .upperRight:
             arrowRect = CGRect(x: hollowFrame.midX - imageSize.width / 2,
-                               y: hollowFrame.maxY + gap,
+                               y: hollowFrame.maxY + spacing,
                                width: imageSize.width,
                                height: imageSize.height)
             var x: CGFloat = 0
             if size.width < hollowFrame.size.width {
                 x = arrowRect.minX - size.width / 2
             } else {
-                x = gap + maxWidth - size.width
+                x = padding + maxWidth - size.width
             }
             textRect = CGRect(x: x,
-                              y: arrowRect.maxY + gap,
+                              y: arrowRect.maxY + spacing,
                               width: size.width,
                               height: size.height)
             
         case .lowerLeft:
             transform = CGAffineTransform(scaleX: -1, y: -1)
             arrowRect = CGRect(x: hollowFrame.midX - imageSize.width / 2,
-                               y: hollowFrame.minY - gap - imageSize.height,
+                               y: hollowFrame.minY - spacing - imageSize.height,
                                width: imageSize.width,
                                height: imageSize.height)
             var x: CGFloat = 0
             if size.width < hollowFrame.size.width {
                 x = arrowRect.maxX - size.width / 2
             } else {
-                x = gap
+                x = padding
             }
             textRect = CGRect(x: x,
-                              y: arrowRect.minY - gap - size.height,
+                              y: arrowRect.minY - spacing - size.height,
                               width: size.width,
                               height: size.height)
             
         case .lowerRight:
             transform = CGAffineTransform(scaleX: 1, y: -1)
             arrowRect = CGRect(x: hollowFrame.midX - imageSize.width / 2,
-                               y: hollowFrame.minY - gap - imageSize.height,
+                               y: hollowFrame.minY - spacing - imageSize.height,
                                width: imageSize.width,
                                height: imageSize.height)
             var x: CGFloat = 0
             if size.width < hollowFrame.size.width {
                 x = arrowRect.minX - size.width / 2
             } else {
-                x = gap + maxWidth - size.width
+                x = padding + maxWidth - size.width
             }
             textRect = CGRect(x: x,
-                              y: arrowRect.minY - gap - size.height,
+                              y: arrowRect.minY - spacing - size.height,
                               width: size.width,
                               height: size.height)
+        }
+        if animatedArrow && animatedText {
+            UIView.animate(withDuration: animationDuration, animations: {
+                self.arrowImageView.transform = transform
+                self.arrowImageView.frame = arrowRect
+                self.textLabel.frame = textRect
+            }, completion: nil)
+            return
+        }
+        if animatedArrow {
+            UIView.animate(withDuration: animationDuration, animations: {
+                self.arrowImageView.transform = transform
+                self.arrowImageView.frame = arrowRect
+            }, completion: nil)
+            self.textLabel.frame = textRect
+            return
+        }
+        if animatedText {
+            UIView.animate(withDuration: animationDuration, animations: {
+                self.textLabel.frame = textRect
+            }, completion: nil)
+            self.arrowImageView.transform = transform
+            self.arrowImageView.frame = arrowRect
+            return
         }
         arrowImageView.transform = transform
         arrowImageView.frame = arrowRect
         textLabel.frame = textRect
     }
     
-    func configMask() {
+    private func configMask() {
+        let fromPath = maskLayer.path
+        
         maskLayer.frame = view.bounds
         maskLayer.fillColor = UIColor.black.cgColor
-        let highlightedPath = UIBezierPath(roundedRect: hollowFrame, cornerRadius: cornerRadius)
-        let path = UIBezierPath(rect: view.bounds)
-        path.append(highlightedPath)
-        maskLayer.path = path.cgPath
+        let highlightedPath = UIBezierPath(roundedRect: hollowFrame, cornerRadius: maskCornerRadius)
+        let toPath = UIBezierPath(rect: view.bounds)
+        toPath.append(highlightedPath)
+        maskLayer.path = toPath.cgPath
         maskLayer.fillRule = kCAFillRuleEvenOdd
         view.layer.mask = maskLayer
+        
+        if animatedMask {
+            let animation = CABasicAnimation(keyPath: "path")
+            animation.duration = animationDuration
+            animation.fromValue = fromPath
+            animation.toValue = toPath
+            maskLayer.add(animation, forKey: nil)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        dismiss(animated: true, completion: nil)
+        if currentIndex < items.count - 1 {
+            currentIndex += 1
+        } else {
+            dismiss(animated: true, completion: completion)
+        }
     }
-    
 }

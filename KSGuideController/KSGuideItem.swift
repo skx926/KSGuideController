@@ -11,16 +11,9 @@ import UIKit
 class KSGuideItem: NSObject {
     var sourceView: UIView!
     var text: String!
-    var insets = UIEdgeInsets.zero
     
     init(sourceView: UIView, text: String) {
         self.sourceView = sourceView
         self.text = text
-    }
-    
-    init(sourceView: UIView, text: String, insets: UIEdgeInsets) {
-        self.sourceView = sourceView
-        self.text = text
-        self.insets = insets
     }
 }

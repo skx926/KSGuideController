@@ -71,6 +71,13 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <outletCollection property="buttons" destination="Bnl-YI-idv" collectionClass="NSMutableArray" id="Qdc-U8-n7O"/>
+                        <outletCollection property="buttons" destination="vR7-V3-jUM" collectionClass="NSMutableArray" id="cij-OJ-rhB"/>
+                        <outletCollection property="buttons" destination="F7K-xu-Srt" collectionClass="NSMutableArray" id="NkD-X5-TlA"/>
+                        <outletCollection property="buttons" destination="vEJ-UT-diy" collectionClass="NSMutableArray" id="eK8-iJ-XWJ"/>
+                        <outletCollection property="buttons" destination="5sd-A5-uDB" collectionClass="NSMutableArray" id="HfP-N5-hwq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
