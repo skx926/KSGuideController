@@ -12,10 +12,10 @@
 		2739BBA11EC05D22002287EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2739BB9F1EC05D22002287EA /* Main.storyboard */; };
 		2739BBA31EC05D22002287EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2739BBA21EC05D22002287EA /* Assets.xcassets */; };
 		2739BBA61EC05D22002287EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2739BBA41EC05D22002287EA /* LaunchScreen.storyboard */; };
-		2739BBB11EC05D4A002287EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2739BBAE1EC05D49002287EA /* Assets.xcassets */; };
 		2739BBB21EC05D4A002287EA /* KSGuideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2739BBAF1EC05D49002287EA /* KSGuideController.swift */; };
 		2739BBB31EC05D4A002287EA /* KSGuideItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2739BBB01EC05D4A002287EA /* KSGuideItem.swift */; };
 		2739BBB51EC06D8F002287EA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2739BBB41EC06D8F002287EA /* Extensions.swift */; };
+		F7606FBB1EC888CD00F6419F /* guide_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7606FBA1EC888CD00F6419F /* guide_arrow@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,10 +26,10 @@
 		2739BBA21EC05D22002287EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2739BBA51EC05D22002287EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2739BBA71EC05D22002287EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2739BBAE1EC05D49002287EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2739BBAF1EC05D49002287EA /* KSGuideController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSGuideController.swift; sourceTree = "<group>"; };
 		2739BBB01EC05D4A002287EA /* KSGuideItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSGuideItem.swift; sourceTree = "<group>"; };
 		2739BBB41EC06D8F002287EA /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F7606FBA1EC888CD00F6419F /* guide_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_arrow@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,13 +76,21 @@
 		2739BBAD1EC05D49002287EA /* KSGuideController */ = {
 			isa = PBXGroup;
 			children = (
-				2739BBAE1EC05D49002287EA /* Assets.xcassets */,
+				F7606FB91EC888CD00F6419F /* Resources */,
 				2739BBAF1EC05D49002287EA /* KSGuideController.swift */,
 				2739BBB01EC05D4A002287EA /* KSGuideItem.swift */,
 				2739BBB41EC06D8F002287EA /* Extensions.swift */,
 			);
 			name = KSGuideController;
 			path = ../../KSGuideController;
+			sourceTree = "<group>";
+		};
+		F7606FB91EC888CD00F6419F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F7606FBA1EC888CD00F6419F /* guide_arrow@3x.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,9 +153,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7606FBB1EC888CD00F6419F /* guide_arrow@3x.png in Resources */,
 				2739BBA61EC05D22002287EA /* LaunchScreen.storyboard in Resources */,
 				2739BBA31EC05D22002287EA /* Assets.xcassets in Resources */,
-				2739BBB11EC05D4A002287EA /* Assets.xcassets in Resources */,
 				2739BBA11EC05D22002287EA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

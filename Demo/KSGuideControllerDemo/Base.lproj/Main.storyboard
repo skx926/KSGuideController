@@ -6,10 +6,12 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--KSGuideControllerDemo-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="KSGuideControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,67 +23,120 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bnl-YI-idv">
-                                <rect key="frame" x="83" y="39" width="41" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Guide">
-                                    <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                </state>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bnl-YI-idv">
+                                <rect key="frame" x="16" y="20" width="343" height="311"/>
+                                <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9uG-Sw-ddi"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEJ-UT-diy">
-                                <rect key="frame" x="31" y="431" width="115" height="205"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <state key="normal" title="Guide"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEJ-UT-diy">
+                                <rect key="frame" x="16" y="339.5" width="167.5" height="311.5"/>
+                                <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z1L-qM-VHz"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vR7-V3-jUM">
-                                <rect key="frame" x="263" y="46" width="75" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Guide"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYL-Z6-QZt">
+                                <rect key="frame" x="191" y="339.5" width="80" height="72"/>
+                                <color key="backgroundColor" red="0.40000000600000002" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
-                                    <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gIS-Uk-J2L"/>
+                                    <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WAN-Ea-iXe"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sd-A5-uDB">
-                                <rect key="frame" x="232" y="505" width="127" height="131"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Guide"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sd-A5-uDB">
+                                <rect key="frame" x="191.5" y="499.5" width="167.5" height="151.5"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gwI-LU-QJ4"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7K-xu-Srt">
-                                <rect key="frame" x="121" y="292" width="132" height="83"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <state key="normal" title="Guide"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vR7-V3-jUM">
+                                <rect key="frame" x="279" y="339.5" width="80" height="152"/>
+                                <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
-                                    <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kta-Eo-x6a"/>
+                                    <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gIS-Uk-J2L"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfy-hv-LGW">
+                                <rect key="frame" x="191" y="419.5" width="36" height="72"/>
+                                <color key="backgroundColor" red="0.40000000600000002" green="1" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yzS-w3-em5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xCa-Q3-aQ7">
+                                <rect key="frame" x="235" y="455" width="36" height="36"/>
+                                <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="guideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H3H-zE-XzV"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-hv-LGW" firstAttribute="top" secondItem="xYL-Z6-QZt" secondAttribute="bottom" constant="8" id="1HE-7y-KLV"/>
+                            <constraint firstItem="vEJ-UT-diy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="1Lj-2x-XhN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vR7-V3-jUM" secondAttribute="trailing" id="8vU-AC-Ux5"/>
+                            <constraint firstItem="wfy-hv-LGW" firstAttribute="width" secondItem="xCa-Q3-aQ7" secondAttribute="width" id="9od-eP-7wG"/>
+                            <constraint firstItem="5sd-A5-uDB" firstAttribute="width" secondItem="vEJ-UT-diy" secondAttribute="width" id="9vF-Ch-Cu0"/>
+                            <constraint firstItem="5sd-A5-uDB" firstAttribute="top" secondItem="wfy-hv-LGW" secondAttribute="bottom" constant="8" id="DnD-1a-qtZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Bnl-YI-idv" secondAttribute="trailing" id="GlE-9h-PcB"/>
+                            <constraint firstItem="vR7-V3-jUM" firstAttribute="top" secondItem="vEJ-UT-diy" secondAttribute="top" id="JTQ-1K-FUw"/>
+                            <constraint firstItem="Bnl-YI-idv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="KwR-5D-FVR"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="vEJ-UT-diy" secondAttribute="bottom" constant="16" id="LDK-fy-Trb"/>
+                            <constraint firstItem="5sd-A5-uDB" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="LmP-IQ-R6Y"/>
+                            <constraint firstItem="vR7-V3-jUM" firstAttribute="leading" secondItem="xYL-Z6-QZt" secondAttribute="trailing" constant="8" id="QMg-LZ-Ma3"/>
+                            <constraint firstItem="xYL-Z6-QZt" firstAttribute="leading" secondItem="vEJ-UT-diy" secondAttribute="trailing" constant="8" id="RBd-LN-GNQ"/>
+                            <constraint firstItem="5sd-A5-uDB" firstAttribute="top" secondItem="vR7-V3-jUM" secondAttribute="bottom" constant="8" id="SCS-z8-pzw"/>
+                            <constraint firstItem="wfy-hv-LGW" firstAttribute="leading" secondItem="vEJ-UT-diy" secondAttribute="trailing" constant="8" id="SUa-ZJ-O9L"/>
+                            <constraint firstItem="vR7-V3-jUM" firstAttribute="height" secondItem="5sd-A5-uDB" secondAttribute="height" id="Thl-yz-UtV"/>
+                            <constraint firstItem="xCa-Q3-aQ7" firstAttribute="height" secondItem="wfy-hv-LGW" secondAttribute="height" multiplier="1:2" id="XnP-1t-3fC"/>
+                            <constraint firstItem="Bnl-YI-idv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="axN-fZ-TXd"/>
+                            <constraint firstItem="wfy-hv-LGW" firstAttribute="height" secondItem="xYL-Z6-QZt" secondAttribute="height" id="bOR-3y-vXF"/>
+                            <constraint firstItem="xCa-Q3-aQ7" firstAttribute="bottom" secondItem="wfy-hv-LGW" secondAttribute="bottom" id="eIa-lW-xyn"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5sd-A5-uDB" secondAttribute="bottom" constant="16" id="fvr-zZ-0jI"/>
+                            <constraint firstItem="xYL-Z6-QZt" firstAttribute="width" secondItem="vR7-V3-jUM" secondAttribute="width" id="gTH-pf-dho"/>
+                            <constraint firstItem="vR7-V3-jUM" firstAttribute="leading" secondItem="xCa-Q3-aQ7" secondAttribute="trailing" constant="8" id="hfs-yq-f8n"/>
+                            <constraint firstItem="xYL-Z6-QZt" firstAttribute="top" secondItem="vR7-V3-jUM" secondAttribute="top" id="mpc-ov-Aqc"/>
+                            <constraint firstItem="Bnl-YI-idv" firstAttribute="height" secondItem="vEJ-UT-diy" secondAttribute="height" id="pWU-kS-ZMV"/>
+                            <constraint firstItem="5sd-A5-uDB" firstAttribute="leading" secondItem="vEJ-UT-diy" secondAttribute="trailing" constant="8" id="sy7-su-YFR"/>
+                            <constraint firstItem="xCa-Q3-aQ7" firstAttribute="leading" secondItem="wfy-hv-LGW" secondAttribute="trailing" constant="8" id="uvl-6k-Tyo"/>
+                            <constraint firstItem="vEJ-UT-diy" firstAttribute="top" secondItem="Bnl-YI-idv" secondAttribute="bottom" constant="8" id="wdx-HK-oww"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="KSGuideControllerDemo" id="0gG-r7-lmk"/>
                     <connections>
-                        <outletCollection property="buttons" destination="Bnl-YI-idv" collectionClass="NSMutableArray" id="Qdc-U8-n7O"/>
-                        <outletCollection property="buttons" destination="vR7-V3-jUM" collectionClass="NSMutableArray" id="cij-OJ-rhB"/>
-                        <outletCollection property="buttons" destination="F7K-xu-Srt" collectionClass="NSMutableArray" id="NkD-X5-TlA"/>
-                        <outletCollection property="buttons" destination="vEJ-UT-diy" collectionClass="NSMutableArray" id="eK8-iJ-XWJ"/>
-                        <outletCollection property="buttons" destination="5sd-A5-uDB" collectionClass="NSMutableArray" id="HfP-N5-hwq"/>
+                        <outletCollection property="buttons" destination="Bnl-YI-idv" collectionClass="NSMutableArray" id="6IT-Kt-Qmf"/>
+                        <outletCollection property="buttons" destination="vEJ-UT-diy" collectionClass="NSMutableArray" id="eDh-VJ-N1u"/>
+                        <outletCollection property="buttons" destination="5sd-A5-uDB" collectionClass="NSMutableArray" id="iyj-gn-Pg3"/>
+                        <outletCollection property="buttons" destination="vR7-V3-jUM" collectionClass="NSMutableArray" id="dRw-Op-2yd"/>
+                        <outletCollection property="buttons" destination="xYL-Z6-QZt" collectionClass="NSMutableArray" id="OHU-Pk-5Oz"/>
+                        <outletCollection property="buttons" destination="wfy-hv-LGW" collectionClass="NSMutableArray" id="Jd9-fn-XeC"/>
+                        <outletCollection property="buttons" destination="xCa-Q3-aQ7" collectionClass="NSMutableArray" id="ABl-VV-xy0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="24.800000000000001" y="34.632683658170919"/>
+            <point key="canvasLocation" x="964" y="34.632683658170919"/>
         </scene>
     </scenes>
 </document>

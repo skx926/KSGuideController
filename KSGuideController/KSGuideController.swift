@@ -39,14 +39,14 @@ class KSGuideController: UIViewController {
     public var backgroundAlpha: CGFloat = 0.7
     public var spacing: CGFloat = 20
     public var padding: CGFloat = 50
-    public var maskInsets = UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)
+    public var maskInsets = UIEdgeInsets(top: -8, left: -8, bottom: -8, right: -8)
     public var font = UIFont.systemFont(ofSize: 14)
     public var textColor = UIColor.white
     public var arrowColor = UIColor.white
     public var arrowImageName = "guide_arrow"
     public var animationDuration = 0.3
     public var animatedMask = true
-    public var animatedText = false
+    public var animatedText = true
     public var animatedArrow = true
     
     private var maskCenter: CGPoint {
@@ -114,7 +114,7 @@ class KSGuideController: UIViewController {
         
         configMask()
         
-        arrowImageView.image = UIImage(named: arrowImageName)
+        arrowImageView.image = UIImage(named: arrowImageName)?.image(with: arrowColor)
         arrowImageView.tintColor = arrowColor
         view.addSubview(arrowImageView)
         
@@ -130,7 +130,7 @@ class KSGuideController: UIViewController {
         var transform: CGAffineTransform = .identity
         let imageSize = arrowImageView.image!.size
         let maxWidth = view.frame.size.width - padding * 2
-        let size = currentItem.text.size(font: textLabel.font, maxWidth: maxWidth)
+        let size = currentItem.text.size(of: font, maxWidth: maxWidth)
         switch region {
             
         case .upperLeft:

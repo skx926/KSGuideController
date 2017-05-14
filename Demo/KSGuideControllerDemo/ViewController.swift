@@ -22,8 +22,17 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showGuides()
+    }
+    
     @IBAction func guideButtonPressed(_ sender: UIButton) {
+        showGuides()
+    }
+
+    func showGuides() {
         var items = [KSGuideItem]()
         for button in buttons {
             let n = Int(arc4random()) % string.characters.count
