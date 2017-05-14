@@ -70,12 +70,12 @@ class KSGuideViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading  tthe view.
         view.backgroundColor = UIColor(white: 0, alpha: 0.7)
         configViews()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -85,6 +85,7 @@ class KSGuideViewController: UIViewController {
         configMask()
         
         arrowImageView.image = #imageLiteral(resourceName: "guide_arrow")
+        arrowImageView.tintColor = .white
         view.addSubview(arrowImageView)
         
         textLabel.textColor = .white
@@ -94,63 +95,84 @@ class KSGuideViewController: UIViewController {
         textLabel.numberOfLines = 0
         view.addSubview(textLabel)
         
+        var textRect: CGRect!
+        var arrowRect: CGRect!
+        var transform: CGAffineTransform = .identity
         let imageSize = arrowImageView.image!.size
+        let maxWidth = view.frame.size.width - gap * 2
+        let size = item.text.size(font: textLabel.font, maxWidth: maxWidth)
         switch region {
+            
         case .upperLeft:
-            let arrowRect = CGRect(x: hollowFrame.origin.x, y: hollowFrame.maxY + gap, width: imageSize.width, height: imageSize.height)
-            arrowImageView.frame = arrowRect
-            let maxWidth = view.bounds.size.width - hollowFrame.minX - gap
-            let size = item.text.size(font: textLabel.font, maxWidth: maxWidth)
-            let textRect = CGRect(x: hollowFrame.origin.x, y: arrowRect.maxY + gap, width: size.width, height: size.height)
-            textLabel.frame = textRect
-        case .upperRight:
-            let arrowRect = CGRect(x: hollowFrame.maxX - imageSize.width, y: hollowFrame.maxY + gap, width: imageSize.width, height: imageSize.height)
-            arrowImageView.frame = arrowRect
-            let maxWidth = hollowFrame.maxX - gap
-            let size = item.text.size(font: textLabel.font, maxWidth: maxWidth)
+            transform = CGAffineTransform(scaleX: -1, y: 1)
+            arrowRect = CGRect(x: hollowFrame.midX - imageSize.width / 2,
+                               y: hollowFrame.maxY + gap,
+                               width: imageSize.width,
+                               height: imageSize.height)
             var x: CGFloat = 0
-            if size.width < maxWidth {
-                x = hollowFrame.maxX - size.width
+            if size.width < hollowFrame.size.width {
+                x = arrowRect.maxX - size.width / 2
             } else {
-                x = hollowFrame.origin.x
+                x = gap
             }
-            let textRect = CGRect(x: x, y: arrowRect.maxY + gap, width: size.width, height: size.height)
-            textLabel.frame = textRect
-        case .lowerLeft:
-            let arrowRect = CGRect(x: hollowFrame.origin.x, y: hollowFrame.minY - gap - imageSize.height, width: imageSize.width, height: imageSize.height)
-            arrowImageView.frame = arrowRect
-            let maxWidth = view.bounds.size.width - hollowFrame.minX - gap
-            let size = item.text.size(font: textLabel.font, maxWidth: maxWidth)
-            let textRect = CGRect(x: hollowFrame.origin.x, y: arrowRect.minY - gap - size.height, width: size.width, height: size.height)
-            textLabel.frame = textRect
-        case .lowerRight:
-            let arrowRect = CGRect(x: hollowFrame.maxX - imageSize.width, y: hollowFrame.minY - gap - imageSize.height, width: imageSize.width, height: imageSize.height)
-            arrowImageView.frame = arrowRect
-            let maxWidth = hollowFrame.maxX - gap
-            let size = item.text.size(font: textLabel.font, maxWidth: maxWidth)
-            var x: CGFloat = 0
-            if size.width < maxWidth {
-                x = hollowFrame.maxX - size.width
-            } else {
-                x = hollowFrame.origin.x
-            }
-            let textRect = CGRect(x: x, y: arrowRect.minY - gap - size.height, width: size.width, height: size.height)
-            textLabel.frame = textRect
-        }
-        configArrowDirection()
-    }
-    
-    func configArrowDirection() {
-        switch region {
-        case .upperLeft:
-            arrowImageView.transform = CGAffineTransform(scaleX: -1, y: 1)
+            textRect = CGRect(x: x,
+                              y: arrowRect.maxY + gap,
+                              width: size.width,
+                              height: size.height)
+            
         case .upperRight:
-            break
+            arrowRect = CGRect(x: hollowFrame.midX - imageSize.width / 2,
+                               y: hollowFrame.maxY + gap,
+                               width: imageSize.width,
+                               height: imageSize.height)
+            var x: CGFloat = 0
+            if size.width < hollowFrame.size.width {
+                x = arrowRect.minX - size.width / 2
+            } else {
+                x = gap + maxWidth - size.width
+            }
+            textRect = CGRect(x: x,
+                              y: arrowRect.maxY + gap,
+                              width: size.width,
+                              height: size.height)
+            
         case .lowerLeft:
-            arrowImageView.transform = CGAffineTransform(scaleX: -1, y: -1)
+            transform = CGAffineTransform(scaleX: -1, y: -1)
+            arrowRect = CGRect(x: hollowFrame.midX - imageSize.width / 2,
+                               y: hollowFrame.minY - gap - imageSize.height,
+                               width: imageSize.width,
+                               height: imageSize.height)
+            var x: CGFloat = 0
+            if size.width < hollowFrame.size.width {
+                x = arrowRect.maxX - size.width / 2
+            } else {
+                x = gap
+            }
+            textRect = CGRect(x: x,
+                              y: arrowRect.minY - gap - size.height,
+                              width: size.width,
+                              height: size.height)
+            
         case .lowerRight:
-            arrowImageView.transform = CGAffineTransform(scaleX: 1, y: -1)
+            transform = CGAffineTransform(scaleX: 1, y: -1)
+            arrowRect = CGRect(x: hollowFrame.midX - imageSize.width / 2,
+                               y: hollowFrame.minY - gap - imageSize.height,
+                               width: imageSize.width,
+                               height: imageSize.height)
+            var x: CGFloat = 0
+            if size.width < hollowFrame.size.width {
+                x = arrowRect.minX - size.width / 2
+            } else {
+                x = gap + maxWidth - size.width
+            }
+            textRect = CGRect(x: x,
+                              y: arrowRect.minY - gap - size.height,
+                              width: size.width,
+                              height: size.height)
         }
+        arrowImageView.transform = transform
+        arrowImageView.frame = arrowRect
+        textLabel.frame = textRect
     }
     
     func configMask() {
@@ -167,5 +189,5 @@ class KSGuideViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         dismiss(animated: true, completion: nil)
     }
-
+    
 }
