@@ -8,19 +8,19 @@
 
 import Foundation
 
-class KSGuideDataManager: NSObject {
+public class KSGuideDataManager: NSObject {
     
     static let userDefaults = UserDefaults.standard
     static let dataKey = "KSGuideDataKey"
     
-    static func reset(for key: String) {
+    public static func reset(for key: String) {
         if var data = userDefaults.object(forKey: dataKey) as? [String: Bool] {
             data.removeValue(forKey: key)
             userDefaults.set(data, forKey: dataKey)
         }
     }
     
-    static func resetAll() {
+    public static func resetAll() {
         userDefaults.set(nil, forKey: dataKey)
     }
     

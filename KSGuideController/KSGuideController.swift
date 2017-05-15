@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KSGuideController: UIViewController {
+public class KSGuideController: UIViewController {
     
     enum Region {
         case upperLeft
@@ -17,8 +17,8 @@ class KSGuideController: UIViewController {
         case lowerRight
     }
     
-    typealias CompletionBlock = (() -> Void)
-    typealias IndexChangedBlock = ((_ index: Int, _ item: KSGuideItem) -> Void)
+    public typealias CompletionBlock = (() -> Void)
+    public typealias IndexChangedBlock = ((_ index: Int, _ item: KSGuideItem) -> Void)
     
     private var items = [KSGuideItem]()
     private var currentIndex: Int = 0 {
@@ -85,11 +85,11 @@ class KSGuideController: UIViewController {
         }
     }
     
-    convenience init(item: KSGuideItem, key: String?) {
+    public convenience init(item: KSGuideItem, key: String?) {
         self.init(items: [item], key: key)
     }
     
-    init(items: [KSGuideItem], key: String?) {
+    public init(items: [KSGuideItem], key: String?) {
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .custom
         modalTransitionStyle = .crossDissolve
@@ -110,18 +110,18 @@ class KSGuideController: UIViewController {
         indexChangedBlock = block
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading  tthe view.
         configViews()
     }
     
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -267,7 +267,7 @@ class KSGuideController: UIViewController {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if currentIndex < items.count - 1 {
             currentIndex += 1
             indexChangedBlock?(currentIndex, currentItem)

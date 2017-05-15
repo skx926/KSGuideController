@@ -8,11 +8,11 @@
 
 import UIKit
 
-class KSGuideItem: NSObject {
+public class KSGuideItem: NSObject {
     var sourceView: UIView!
     var text: String!
     
-    init(sourceView: UIView, text: String) {
+    public init(sourceView: UIView, text: String) {
         self.sourceView = sourceView
         self.text = text
     }
