@@ -5,12 +5,13 @@ KSGuideController
 [![CocoaPods](http://img.shields.io/cocoapods/p/KSGuideController.svg?style=flat)](http://cocoapods.org/?q=KSGuideController)&nbsp;
 [![Support](https://img.shields.io/badge/support-iOS%208.0%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)&nbsp;
 
-### A beautiful animated novice guide controller.
+### A beautiful animated novice guide controller written in Swift.
 
 ![Demo~](https://raw.github.com/skx926/KSGuideController/master/Demo/Images/Demo.gif)
 
 Usage
 ==============
+### Swift
 ```swift
 import KSGuideController
 
