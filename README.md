@@ -9,6 +9,12 @@ KSGuideController
 
 ![Demo~](https://raw.github.com/skx926/KSGuideController/master/Demo/Images/Demo.gif)
 
+Features
+==============
+- Animated page transition.
+- A batch of properties for customization.
+- Cache support.
+
 Usage
 ==============
 ### Swift
