@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		272B4D001EC953C7007AC668 /* KSGuideDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B4CFF1EC953C6007AC668 /* KSGuideDataManager.swift */; };
 		2739BB9C1EC05D22002287EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2739BB9B1EC05D22002287EA /* AppDelegate.swift */; };
 		2739BB9E1EC05D22002287EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2739BB9D1EC05D22002287EA /* ViewController.swift */; };
 		2739BBA11EC05D22002287EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2739BB9F1EC05D22002287EA /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		272B4CFF1EC953C6007AC668 /* KSGuideDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSGuideDataManager.swift; sourceTree = "<group>"; };
 		2739BB981EC05D22002287EA /* KSGuideControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSGuideControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2739BB9B1EC05D22002287EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2739BB9D1EC05D22002287EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			children = (
 				F7606FB91EC888CD00F6419F /* Resources */,
 				2739BBAF1EC05D49002287EA /* KSGuideController.swift */,
+				272B4CFF1EC953C6007AC668 /* KSGuideDataManager.swift */,
 				2739BBB01EC05D4A002287EA /* KSGuideItem.swift */,
 				2739BBB41EC06D8F002287EA /* Extensions.swift */,
 			);
@@ -167,6 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				272B4D001EC953C7007AC668 /* KSGuideDataManager.swift in Sources */,
 				2739BBB51EC06D8F002287EA /* Extensions.swift in Sources */,
 				2739BB9E1EC05D22002287EA /* ViewController.swift in Sources */,
 				2739BBB21EC05D4A002287EA /* KSGuideController.swift in Sources */,

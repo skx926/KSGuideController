@@ -18,6 +18,7 @@ class KSGuideController: UIViewController {
     }
     
     typealias CompletionBlock = (() -> Void)
+    typealias IndexChangedBlock = ((_ index: Int, _ item: KSGuideItem) -> Void)
     
     private var items = [KSGuideItem]()
     private var currentIndex: Int = 0 {
@@ -34,6 +35,8 @@ class KSGuideController: UIViewController {
     private let textLabel = UILabel()
     private let maskLayer = CAShapeLayer()
     private var completion: CompletionBlock?
+    private var indexChangedBlock: IndexChangedBlock?
+    private var guideKey: String?
     
     public var maskCornerRadius: CGFloat = 5
     public var backgroundAlpha: CGFloat = 0.7
@@ -82,15 +85,29 @@ class KSGuideController: UIViewController {
         }
     }
     
-    convenience init(item: KSGuideItem, completion:(() -> ())?) {
-        self.init(items: [item], completion: completion)
+    convenience init(item: KSGuideItem, key: String?) {
+        self.init(items: [item], key: key)
     }
     
-    init(items: [KSGuideItem], completion:(() -> ())?) {
+    init(items: [KSGuideItem], key: String?) {
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .custom
         modalTransitionStyle = .crossDissolve
         self.items.append(contentsOf: items)
+        self.guideKey = key
+    }
+    
+    public func show(from vc: UIViewController, completion:CompletionBlock?) {
+        self.completion = completion
+        if let key = guideKey {
+            if KSGuideDataManager.shouldShowGuide(with: key) {
+                vc.present(self, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    public func setIndexChangeBlock(_ block: IndexChangedBlock?) {
+        indexChangedBlock = block
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -114,7 +131,7 @@ class KSGuideController: UIViewController {
         
         configMask()
         
-        arrowImageView.image = UIImage(named: arrowImageName)?.image(with: arrowColor)
+        arrowImageView.image = UIImage(named: arrowImageName)?.ks_image(with: arrowColor)
         arrowImageView.tintColor = arrowColor
         view.addSubview(arrowImageView)
         
@@ -130,7 +147,7 @@ class KSGuideController: UIViewController {
         var transform: CGAffineTransform = .identity
         let imageSize = arrowImageView.image!.size
         let maxWidth = view.frame.size.width - padding * 2
-        let size = currentItem.text.size(of: font, maxWidth: maxWidth)
+        let size = currentItem.text.ks_size(of: font, maxWidth: maxWidth)
         switch region {
             
         case .upperLeft:
@@ -253,6 +270,7 @@ class KSGuideController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if currentIndex < items.count - 1 {
             currentIndex += 1
+            indexChangedBlock?(currentIndex, currentItem)
         } else {
             dismiss(animated: true, completion: completion)
         }

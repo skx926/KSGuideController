@@ -33,6 +33,9 @@ class ViewController: UIViewController {
     }
 
     func showGuides() {
+        // Reset to show everytime.
+        KSGuideDataManager.reset(for: "MainGuide")
+        
         var items = [KSGuideItem]()
         for button in buttons {
             let n = Int(arc4random()) % string.characters.count
@@ -41,10 +44,13 @@ class ViewController: UIViewController {
             let item = KSGuideItem(sourceView: button, text: text)
             items.append(item)
         }
-        let vc = KSGuideController(items: items) {
-            print("fadfdasf")
+        let vc = KSGuideController(items: items, key: "MainGuide")
+        vc.setIndexChangeBlock { (index, item) in
+            print("Index has change to \(index)")
         }
-        present(vc, animated: true, completion: nil)
+        vc.show(from: self) { 
+            print("Guide controller has been dismissed")
+        }
     }
     
 }
