@@ -76,12 +76,17 @@ public class KSGuideController: UIViewController {
     
     private var hollowFrame: CGRect {
         get {
-            var rect = currentItem.sourceView.frame;
+            var rect: CGRect
+            if let sourceView = currentItem.sourceView {
+                rect = view.convert(sourceView.frame, from: sourceView.superview)
+            } else {
+                rect = currentItem.rect
+            }
             rect.origin.x += maskInsets.left
             rect.origin.y += maskInsets.top
             rect.size.width -= maskInsets.right + maskInsets.left
             rect.size.height -= maskInsets.bottom + maskInsets.top
-            return view.convert(rect, from: currentItem.sourceView.superview)
+            return rect
         }
     }
     
