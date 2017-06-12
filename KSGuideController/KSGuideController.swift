@@ -78,7 +78,12 @@ public class KSGuideController: UIViewController {
         get {
             var rect: CGRect
             if let sourceView = currentItem.sourceView {
-                rect = view.convert(sourceView.frame, from: sourceView.superview)
+                let systemVersion = (UIDevice.current.systemVersion as NSString).floatValue
+                if systemVersion >= 8.0 && systemVersion < 9.0 {
+                    rect = view.convert(sourceView.frame, from: sourceView.superview)
+                } else {
+                    rect = view.convert(sourceView.frame, from: sourceView.superview)
+                }
             } else {
                 rect = currentItem.rect
             }
@@ -90,10 +95,13 @@ public class KSGuideController: UIViewController {
         }
     }
     
+    
+    // Give a nil key to ignore the cache logic.
     public convenience init(item: KSGuideItem, key: String?) {
         self.init(items: [item], key: key)
     }
     
+    // Give a nil key to ignore the cache logic.
     public init(items: [KSGuideItem], key: String?) {
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .custom
@@ -108,6 +116,8 @@ public class KSGuideController: UIViewController {
             if KSGuideDataManager.shouldShowGuide(with: key) {
                 vc.present(self, animated: true, completion: nil)
             }
+        } else {
+            vc.present(self, animated: true, completion: nil)
         }
     }
     
@@ -122,8 +132,15 @@ public class KSGuideController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading  tthe view.
+        // Do any additional setup after loading  the view.
         configViews()
+    }
+    
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { (ctx) in
+            self.configMask()
+            self.configViewFrames()
+        }, completion: nil)
     }
     
     override public func didReceiveMemoryWarning() {
@@ -133,8 +150,6 @@ public class KSGuideController: UIViewController {
     
     private func configViews() {
         view.backgroundColor = UIColor(white: 0, alpha: backgroundAlpha)
-        
-        configMask()
         
         arrowImageView.image = UIImage(named: arrowImageName)?.ks_image(with: arrowColor)
         arrowImageView.tintColor = arrowColor
@@ -146,6 +161,33 @@ public class KSGuideController: UIViewController {
         textLabel.text = currentItem.text
         textLabel.numberOfLines = 0
         view.addSubview(textLabel)
+        
+        configMask()
+        configViewFrames()
+    }
+    
+    private func configMask() {
+        let fromPath = maskLayer.path
+        
+        maskLayer.fillColor = UIColor.black.cgColor
+        let highlightedPath = UIBezierPath(roundedRect: hollowFrame, cornerRadius: maskCornerRadius)
+        let toPath = UIBezierPath(rect: view.bounds)
+        toPath.append(highlightedPath)
+        maskLayer.path = toPath.cgPath
+        maskLayer.fillRule = kCAFillRuleEvenOdd
+        view.layer.mask = maskLayer
+        
+        if animatedMask {
+            let animation = CABasicAnimation(keyPath: "path")
+            animation.duration = animationDuration
+            animation.fromValue = fromPath
+            animation.toValue = toPath
+            maskLayer.add(animation, forKey: nil)
+        }
+    }
+    
+    private func configViewFrames() {
+        maskLayer.frame = view.bounds
         
         var textRect: CGRect!
         var arrowRect: CGRect!
@@ -249,27 +291,6 @@ public class KSGuideController: UIViewController {
         arrowImageView.transform = transform
         arrowImageView.frame = arrowRect
         textLabel.frame = textRect
-    }
-    
-    private func configMask() {
-        let fromPath = maskLayer.path
-        
-        maskLayer.frame = view.bounds
-        maskLayer.fillColor = UIColor.black.cgColor
-        let highlightedPath = UIBezierPath(roundedRect: hollowFrame, cornerRadius: maskCornerRadius)
-        let toPath = UIBezierPath(rect: view.bounds)
-        toPath.append(highlightedPath)
-        maskLayer.path = toPath.cgPath
-        maskLayer.fillRule = kCAFillRuleEvenOdd
-        view.layer.mask = maskLayer
-        
-        if animatedMask {
-            let animation = CABasicAnimation(keyPath: "path")
-            animation.duration = animationDuration
-            animation.fromValue = fromPath
-            animation.toValue = toPath
-            maskLayer.add(animation, forKey: nil)
-        }
     }
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
