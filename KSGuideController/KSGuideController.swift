@@ -82,7 +82,13 @@ public class KSGuideController: UIViewController {
                 if systemVersion >= 8.0 && systemVersion < 9.0 {
                     rect = view.convert(sourceView.frame, from: sourceView.superview)
                 } else {
-                    rect = view.convert(sourceView.frame, from: sourceView.superview)
+                    // Unwrap the superView to ensure that we call `convert(_ rect: CGRect, from coordinateSpace: UICoordinateSpace) -> CGRect`
+                    // instead of `convert(_ rect: CGRect, from view: UIView?) -> CGRect`
+                    if let superView = sourceView.superview {
+                        rect = view.convert(sourceView.frame, from: superView)
+                    } else {
+                        assertionFailure("sourceView must have a superView!")
+                    }
                 }
             } else {
                 rect = currentItem.rect
