@@ -46,7 +46,7 @@ public class KSGuideController: UIViewController {
     public var font = UIFont.systemFont(ofSize: 14)
     public var textColor = UIColor.white
     public var arrowColor = UIColor.white
-    public var arrowImageName = "guide_arrow"
+    public var arrowImage: UIImage?
     public var animationDuration = 0.3
     public var animatedMask = true
     public var animatedText = true
@@ -157,7 +157,11 @@ public class KSGuideController: UIViewController {
     private func configViews() {
         view.backgroundColor = UIColor(white: 0, alpha: backgroundAlpha)
         
-        arrowImageView.image = UIImage(named: arrowImageName)?.ks_image(with: arrowColor)
+        if let image = arrowImage {
+            arrowImageView.image = image.ks_image(with: arrowColor)
+        } else {
+            arrowImageView.image = UIImage(named: "guide_arrow", in: Bundle(for: KSGuideController.self), compatibleWith: nil)?.ks_image(with: arrowColor)
+        }
         arrowImageView.tintColor = arrowColor
         view.addSubview(arrowImageView)
         
