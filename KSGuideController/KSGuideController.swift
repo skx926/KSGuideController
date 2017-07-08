@@ -76,7 +76,7 @@ public class KSGuideController: UIViewController {
     
     private var hollowFrame: CGRect {
         get {
-            var rect: CGRect
+            var rect: CGRect = .zero
             if let sourceView = currentItem.sourceView {
                 let systemVersion = (UIDevice.current.systemVersion as NSString).floatValue
                 if systemVersion >= 8.0 && systemVersion < 9.0 {
