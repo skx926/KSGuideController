@@ -9,9 +9,9 @@
 import UIKit
 
 public class KSGuideItem: NSObject {
-    var sourceView: UIView?
-    var rect: CGRect = .zero
-    var text: String!
+    public var sourceView: UIView?
+    public var rect: CGRect = .zero
+    public var text: String!
     
     public init(sourceView: UIView, text: String) {
         self.sourceView = sourceView

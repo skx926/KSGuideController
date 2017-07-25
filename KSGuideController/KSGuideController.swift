@@ -18,12 +18,14 @@ public class KSGuideController: UIViewController {
     }
     
     public typealias CompletionBlock = (() -> Void)
-    public typealias IndexChangedBlock = ((_ index: Int, _ item: KSGuideItem) -> Void)
+    public typealias IndexChangeBlock = ((_ index: Int, _ item: KSGuideItem) -> Void)
     
     private var items = [KSGuideItem]()
     private var currentIndex: Int = 0 {
         didSet {
+            self.indexWillChangeBlock?(currentIndex, self.currentItem)
             configViews()
+            self.indexDidChangeBlock?(currentIndex, self.currentItem)
         }
     }
     private var currentItem: KSGuideItem {
@@ -35,7 +37,8 @@ public class KSGuideController: UIViewController {
     private let textLabel = UILabel()
     private let maskLayer = CAShapeLayer()
     private var completion: CompletionBlock?
-    private var indexChangedBlock: IndexChangedBlock?
+    private var indexWillChangeBlock: IndexChangeBlock?
+    private var indexDidChangeBlock: IndexChangeBlock?
     private var guideKey: String?
     
     public var maskCornerRadius: CGFloat = 5
@@ -51,6 +54,8 @@ public class KSGuideController: UIViewController {
     public var animatedMask = true
     public var animatedText = true
     public var animatedArrow = true
+    
+    public var statusBarHidden = false
     
     private var maskCenter: CGPoint {
         get {
@@ -127,8 +132,12 @@ public class KSGuideController: UIViewController {
         }
     }
     
-    public func setIndexChangeBlock(_ block: IndexChangedBlock?) {
-        indexChangedBlock = block
+    public func setIndexWillChangeBlock(_ block: IndexChangeBlock?) {
+        indexWillChangeBlock = block
+    }
+    
+    public func setIndexDidChangeBlock(_ block: IndexChangeBlock?) {
+        indexDidChangeBlock = block;
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -140,6 +149,10 @@ public class KSGuideController: UIViewController {
         
         // Do any additional setup after loading  the view.
         configViews()
+    }
+    
+    public override var prefersStatusBarHidden: Bool {
+        return statusBarHidden
     }
     
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -306,7 +319,6 @@ public class KSGuideController: UIViewController {
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if currentIndex < items.count - 1 {
             currentIndex += 1
-            indexChangedBlock?(currentIndex, currentItem)
         } else {
             dismiss(animated: true, completion: completion)
         }
