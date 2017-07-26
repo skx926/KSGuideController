@@ -147,8 +147,8 @@ public class KSGuideController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading  the view.
-        configViews()
+        let index = currentIndex
+        currentIndex = index
     }
     
     public override var prefersStatusBarHidden: Bool {
@@ -193,7 +193,10 @@ public class KSGuideController: UIViewController {
         let fromPath = maskLayer.path
         
         maskLayer.fillColor = UIColor.black.cgColor
-        let highlightedPath = UIBezierPath(roundedRect: hollowFrame, cornerRadius: maskCornerRadius)
+        var radius = maskCornerRadius
+        let frame = hollowFrame
+        radius = min(radius, min(frame.width / 2.0, frame.height / 2.0))
+        let highlightedPath = UIBezierPath(roundedRect: hollowFrame, cornerRadius: radius)
         let toPath = UIBezierPath(rect: view.bounds)
         toPath.append(highlightedPath)
         maskLayer.path = toPath.cgPath
