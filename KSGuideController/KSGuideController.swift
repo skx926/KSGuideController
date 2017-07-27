@@ -221,6 +221,7 @@ public class KSGuideController: UIViewController {
         let imageSize = arrowImageView.image!.size
         let maxWidth = view.frame.size.width - padding * 2
         let size = currentItem.text.ks_size(of: font, maxWidth: maxWidth)
+        let maxX = padding + maxWidth - size.width
         switch region {
             
         case .upperLeft:
@@ -235,7 +236,7 @@ public class KSGuideController: UIViewController {
             } else {
                 x = padding
             }
-            textRect = CGRect(x: x,
+            textRect = CGRect(x: min(x, maxX),
                               y: arrowRect.maxY + spacing,
                               width: size.width,
                               height: size.height)
@@ -251,7 +252,7 @@ public class KSGuideController: UIViewController {
             } else {
                 x = padding + maxWidth - size.width
             }
-            textRect = CGRect(x: x,
+            textRect = CGRect(x: min(x, maxX),
                               y: arrowRect.maxY + spacing,
                               width: size.width,
                               height: size.height)
@@ -268,7 +269,7 @@ public class KSGuideController: UIViewController {
             } else {
                 x = padding
             }
-            textRect = CGRect(x: x,
+            textRect = CGRect(x: min(x, maxX),
                               y: arrowRect.minY - spacing - size.height,
                               width: size.width,
                               height: size.height)
@@ -285,7 +286,7 @@ public class KSGuideController: UIViewController {
             } else {
                 x = padding + maxWidth - size.width
             }
-            textRect = CGRect(x: x,
+            textRect = CGRect(x: min(x, maxX),
                               y: arrowRect.minY - spacing - size.height,
                               width: size.width,
                               height: size.height)
