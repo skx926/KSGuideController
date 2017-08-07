@@ -21,7 +21,7 @@ public class KSGuideController: UIViewController {
     public typealias IndexChangeBlock = ((_ index: Int, _ item: KSGuideItem) -> Void)
     
     private var items = [KSGuideItem]()
-    private var currentIndex: Int = 0 {
+    public var currentIndex: Int = -1 {
         didSet {
             self.indexWillChangeBlock?(currentIndex, self.currentItem)
             configViews()
@@ -147,8 +147,7 @@ public class KSGuideController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        let index = currentIndex
-        currentIndex = index
+        currentIndex = 0
     }
     
     public override var prefersStatusBarHidden: Bool {
