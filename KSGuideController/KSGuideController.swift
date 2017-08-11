@@ -229,13 +229,8 @@ public class KSGuideController: UIViewController {
                                y: hollowFrame.maxY + spacing,
                                width: imageSize.width,
                                height: imageSize.height)
-            var x: CGFloat = 0
-            if size.width < hollowFrame.size.width {
-                x = arrowRect.maxX - size.width / 2
-            } else {
-                x = padding
-            }
-            textRect = CGRect(x: min(x, maxX),
+            let x: CGFloat = min(maxX, arrowRect.maxX - size.width / 2)
+            textRect = CGRect(x: x,
                               y: arrowRect.maxY + spacing,
                               width: size.width,
                               height: size.height)
@@ -245,13 +240,8 @@ public class KSGuideController: UIViewController {
                                y: hollowFrame.maxY + spacing,
                                width: imageSize.width,
                                height: imageSize.height)
-            var x: CGFloat = 0
-            if size.width < hollowFrame.size.width {
-                x = arrowRect.minX - size.width / 2
-            } else {
-                x = padding + maxWidth - size.width
-            }
-            textRect = CGRect(x: min(x, maxX),
+            let x: CGFloat = min(maxX, arrowRect.minX - size.width / 2)
+            textRect = CGRect(x: x,
                               y: arrowRect.maxY + spacing,
                               width: size.width,
                               height: size.height)
@@ -262,13 +252,8 @@ public class KSGuideController: UIViewController {
                                y: hollowFrame.minY - spacing - imageSize.height,
                                width: imageSize.width,
                                height: imageSize.height)
-            var x: CGFloat = 0
-            if size.width < hollowFrame.size.width {
-                x = arrowRect.maxX - size.width / 2
-            } else {
-                x = padding
-            }
-            textRect = CGRect(x: min(x, maxX),
+            let x: CGFloat = min(maxX, arrowRect.maxX - size.width / 2)
+            textRect = CGRect(x: x,
                               y: arrowRect.minY - spacing - size.height,
                               width: size.width,
                               height: size.height)
@@ -279,13 +264,8 @@ public class KSGuideController: UIViewController {
                                y: hollowFrame.minY - spacing - imageSize.height,
                                width: imageSize.width,
                                height: imageSize.height)
-            var x: CGFloat = 0
-            if size.width < hollowFrame.size.width {
-                x = arrowRect.minX - size.width / 2
-            } else {
-                x = padding + maxWidth - size.width
-            }
-            textRect = CGRect(x: min(x, maxX),
+            let x: CGFloat = min(maxX, arrowRect.minX - size.width / 2)
+            textRect = CGRect(x: x,
                               y: arrowRect.minY - spacing - size.height,
                               width: size.width,
                               height: size.height)
