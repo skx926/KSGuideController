@@ -30,8 +30,11 @@ for button in buttons {
     items.append(item)
 }
 let vc = KSGuideController(items: items, key: "MainGuide")
-vc.setIndexChangeBlock { (index, item) in
-    print("Index has change to \(index)")
+vc.setIndexWillChangeBlock { (index, item) in
+    print("Index will change to \(index)")
+}
+vc.setIndexDidChangeBlock { (index, item) in
+    print("Index did change to \(index)")
 }
 vc.show(from: self) { 
     print("Guide controller has been dismissed")
