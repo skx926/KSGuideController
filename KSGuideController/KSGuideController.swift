@@ -229,7 +229,7 @@ public class KSGuideController: UIViewController {
                                y: hollowFrame.maxY + spacing,
                                width: imageSize.width,
                                height: imageSize.height)
-            let x: CGFloat = min(maxX, arrowRect.maxX - size.width / 2)
+            let x: CGFloat = max(padding, min(maxX, arrowRect.maxX - size.width / 2))
             textRect = CGRect(x: x,
                               y: arrowRect.maxY + spacing,
                               width: size.width,
@@ -240,7 +240,7 @@ public class KSGuideController: UIViewController {
                                y: hollowFrame.maxY + spacing,
                                width: imageSize.width,
                                height: imageSize.height)
-            let x: CGFloat = min(maxX, arrowRect.minX - size.width / 2)
+            let x: CGFloat = max(padding, min(maxX, arrowRect.minX - size.width / 2))
             textRect = CGRect(x: x,
                               y: arrowRect.maxY + spacing,
                               width: size.width,
@@ -252,7 +252,7 @@ public class KSGuideController: UIViewController {
                                y: hollowFrame.minY - spacing - imageSize.height,
                                width: imageSize.width,
                                height: imageSize.height)
-            let x: CGFloat = min(maxX, arrowRect.maxX - size.width / 2)
+            let x: CGFloat = max(padding, min(maxX, arrowRect.maxX - size.width / 2))
             textRect = CGRect(x: x,
                               y: arrowRect.minY - spacing - size.height,
                               width: size.width,
@@ -264,7 +264,7 @@ public class KSGuideController: UIViewController {
                                y: hollowFrame.minY - spacing - imageSize.height,
                                width: imageSize.width,
                                height: imageSize.height)
-            let x: CGFloat = min(maxX, arrowRect.minX - size.width / 2)
+            let x: CGFloat = max(padding, min(maxX, arrowRect.minX - size.width / 2))
             textRect = CGRect(x: x,
                               y: arrowRect.minY - spacing - size.height,
                               width: size.width,
