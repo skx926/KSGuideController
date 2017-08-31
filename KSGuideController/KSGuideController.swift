@@ -170,10 +170,11 @@ public class KSGuideController: UIViewController {
         view.backgroundColor = UIColor(white: 0, alpha: backgroundAlpha)
         
         if let image = arrowImage {
-            arrowImageView.image = image.ks_image(with: arrowColor)
+            arrowImageView.image = image
         } else {
-            arrowImageView.image = UIImage(named: "guide_arrow", in: Bundle(for: KSGuideController.self), compatibleWith: nil)?.ks_image(with: arrowColor)
+            arrowImageView.image = UIImage(named: "guide_arrow", in: Bundle(for: KSGuideController.self), compatibleWith: nil)
         }
+        arrowImageView.image = arrowImageView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         arrowImageView.tintColor = arrowColor
         view.addSubview(arrowImageView)
         
