@@ -169,7 +169,9 @@ public class KSGuideController: UIViewController {
     private func configViews() {
         view.backgroundColor = UIColor(white: 0, alpha: backgroundAlpha)
         
-        if let image = arrowImage {
+        if let image = currentItem.arrowImage {
+            arrowImageView.image = image
+        } else if let image = arrowImage {
             arrowImageView.image = image
         } else {
             arrowImageView.image = UIImage(named: "guide_arrow", in: Bundle(for: KSGuideController.self), compatibleWith: nil)

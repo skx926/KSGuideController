@@ -11,15 +11,18 @@ import UIKit
 public class KSGuideItem: NSObject {
     public var sourceView: UIView?
     public var rect: CGRect = .zero
+    public var arrowImage: UIImage?
     public var text: String!
     
-    public init(sourceView: UIView, text: String) {
+    public init(sourceView: UIView, arrowImage: UIImage? = nil, text: String) {
         self.sourceView = sourceView
+        self.arrowImage = arrowImage
         self.text = text
     }
     
-    public init(rect: CGRect, text: String) {
+    public init(rect: CGRect, arrowImage: UIImage? = nil, text: String) {
         self.rect = rect
+        self.arrowImage = arrowImage
         self.text = text
     }
 }
