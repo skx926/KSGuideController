@@ -38,10 +38,10 @@ class ViewController: UIViewController {
         
         var items = [KSGuideItem]()
         for button in buttons {
-            let n = Int(arc4random()) % string.characters.count
+            let n = Int(arc4random()) % string.count
             let index = string.index(string.startIndex, offsetBy: Int(n))
-            let text = string.substring(to: index)
-            let item = KSGuideItem(sourceView: button, arrowImage: #imageLiteral(resourceName: "arrow"), text: text)
+            let text = string[..<index]
+            let item = KSGuideItem(sourceView: button, arrowImage: #imageLiteral(resourceName: "arrow"), text: String(text))
             items.append(item)
         }
         let vc = KSGuideController(items: items, key: "MainGuide")

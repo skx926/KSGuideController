@@ -12,7 +12,7 @@ import UIKit
 extension String {
     func ks_size(of font: UIFont, maxWidth: CGFloat) -> CGSize {
         let s = self as NSString
-        let size = s.boundingRect(with: CGSize(width: maxWidth, height: .infinity), options: [.usesLineFragmentOrigin, .truncatesLastVisibleLine, .usesFontLeading], attributes: [NSFontAttributeName: font], context: nil).size
+        let size = s.boundingRect(with: CGSize(width: maxWidth, height: .infinity), options: [.usesLineFragmentOrigin, .truncatesLastVisibleLine, .usesFontLeading], attributes: [NSAttributedStringKey.font: font], context: nil).size
         return size;
     }
 }
