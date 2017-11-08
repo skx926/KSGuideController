@@ -49,6 +49,7 @@ public class KSGuideController: UIViewController {
     public var font = UIFont.systemFont(ofSize: 14)
     public var textColor = UIColor.white
     public var arrowColor = UIColor.white
+    // Global arrow image for all items
     public var arrowImage: UIImage?
     public var animationDuration = 0.3
     public var animatedMask = true

@@ -23,11 +23,18 @@ import KSGuideController
 
 var items = [KSGuideItem]()
 for button in buttons {
-    let n = Int(arc4random()) % string.characters.count
+    let n = Int(arc4random()) % string.count
     let index = string.index(string.startIndex, offsetBy: Int(n))
-    let text = string.substring(to: index)
-    let item = KSGuideItem(sourceView: button, text: text)
-    items.append(item)
+    let text = string[..<index]
+    if n % 2 == 0 {
+        // Use custom arrow image for every item, you can also set global arrow image for all items by setting the arrowImage property for a KSGuideController instance.
+        let item = KSGuideItem(sourceView: button, arrowImage: #imageLiteral(resourceName: "arrow"), text: String(text))
+        items.append(item)
+    } else {
+        // Use default arrow image
+        let item = KSGuideItem(sourceView: button, text: String(text))
+        items.append(item)
+    }
 }
 let vc = KSGuideController(items: items, key: "MainGuide")
 vc.setIndexWillChangeBlock { (index, item) in

@@ -11,6 +11,7 @@ import UIKit
 public class KSGuideItem: NSObject {
     public var sourceView: UIView?
     public var rect: CGRect = .zero
+    // arrow image for this item
     public var arrowImage: UIImage?
     public var text: String!
     
