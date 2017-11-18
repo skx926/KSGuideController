@@ -8,20 +8,20 @@
 
 import UIKit
 
-public class KSGuideItem: NSObject {
-    public var sourceView: UIView?
-    public var rect: CGRect = .zero
+@objc public class KSGuideItem: NSObject {
+    @objc public var sourceView: UIView?
+    @objc public var rect: CGRect = .zero
     // arrow image for this item
-    public var arrowImage: UIImage?
-    public var text: String!
+    @objc public var arrowImage: UIImage?
+    @objc public var text: String!
     
-    public init(sourceView: UIView, arrowImage: UIImage? = nil, text: String) {
+    @objc public init(sourceView: UIView, arrowImage: UIImage? = nil, text: String) {
         self.sourceView = sourceView
         self.arrowImage = arrowImage
         self.text = text
     }
     
-    public init(rect: CGRect, arrowImage: UIImage? = nil, text: String) {
+    @objc public init(rect: CGRect, arrowImage: UIImage? = nil, text: String) {
         self.rect = rect
         self.arrowImage = arrowImage
         self.text = text

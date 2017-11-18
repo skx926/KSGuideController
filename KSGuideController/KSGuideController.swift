@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class KSGuideController: UIViewController {
+@objc public class KSGuideController: UIViewController {
     
     enum Region {
         case upperLeft
@@ -21,7 +21,7 @@ public class KSGuideController: UIViewController {
     public typealias IndexChangeBlock = ((_ index: Int, _ item: KSGuideItem) -> Void)
     
     private var items = [KSGuideItem]()
-    public var currentIndex: Int = -1 {
+    @objc public var currentIndex: Int = -1 {
         didSet {
             self.indexWillChangeBlock?(currentIndex, self.currentItem)
             configViews()
@@ -41,22 +41,22 @@ public class KSGuideController: UIViewController {
     private var indexDidChangeBlock: IndexChangeBlock?
     private var guideKey: String?
     
-    public var maskCornerRadius: CGFloat = 5
-    public var backgroundAlpha: CGFloat = 0.7
-    public var spacing: CGFloat = 20
-    public var padding: CGFloat = 50
-    public var maskInsets = UIEdgeInsets(top: -8, left: -8, bottom: -8, right: -8)
-    public var font = UIFont.systemFont(ofSize: 14)
-    public var textColor = UIColor.white
-    public var arrowColor = UIColor.white
+    @objc public var maskCornerRadius: CGFloat = 5
+    @objc public var backgroundAlpha: CGFloat = 0.7
+    @objc public var spacing: CGFloat = 20
+    @objc public var padding: CGFloat = 50
+    @objc public var maskInsets = UIEdgeInsets(top: -8, left: -8, bottom: -8, right: -8)
+    @objc public var font = UIFont.systemFont(ofSize: 14)
+    @objc public var textColor = UIColor.white
+    @objc public var arrowColor = UIColor.white
     // Global arrow image for all items
-    public var arrowImage: UIImage?
-    public var animationDuration = 0.3
-    public var animatedMask = true
-    public var animatedText = true
-    public var animatedArrow = true
+    @objc public var arrowImage: UIImage?
+    @objc public var animationDuration = 0.3
+    @objc public var animatedMask = true
+    @objc public var animatedText = true
+    @objc public var animatedArrow = true
     
-    public var statusBarHidden = false
+    @objc public var statusBarHidden = false
     
     private var maskCenter: CGPoint {
         get {
@@ -109,12 +109,12 @@ public class KSGuideController: UIViewController {
     
     
     // Give a nil key to ignore the cache logic.
-    public convenience init(item: KSGuideItem, key: String?) {
+    @objc public convenience init(item: KSGuideItem, key: String?) {
         self.init(items: [item], key: key)
     }
     
     // Give a nil key to ignore the cache logic.
-    public init(items: [KSGuideItem], key: String?) {
+    @objc public init(items: [KSGuideItem], key: String?) {
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .custom
         modalTransitionStyle = .crossDissolve
@@ -122,7 +122,7 @@ public class KSGuideController: UIViewController {
         self.guideKey = key
     }
     
-    public func show(from vc: UIViewController, completion:CompletionBlock?) {
+    @objc public func show(from vc: UIViewController, completion:CompletionBlock?) {
         self.completion = completion
         if let key = guideKey {
             if KSGuideDataManager.shouldShowGuide(with: key) {
@@ -133,36 +133,36 @@ public class KSGuideController: UIViewController {
         }
     }
     
-    public func setIndexWillChangeBlock(_ block: IndexChangeBlock?) {
+    @objc public func setIndexWillChangeBlock(_ block: IndexChangeBlock?) {
         indexWillChangeBlock = block
     }
     
-    public func setIndexDidChangeBlock(_ block: IndexChangeBlock?) {
+    @objc public func setIndexDidChangeBlock(_ block: IndexChangeBlock?) {
         indexDidChangeBlock = block;
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    @objc required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override public func viewDidLoad() {
+    @objc override public func viewDidLoad() {
         super.viewDidLoad()
         
         currentIndex = 0
     }
     
-    public override var prefersStatusBarHidden: Bool {
+    @objc public override var prefersStatusBarHidden: Bool {
         return statusBarHidden
     }
     
-    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    @objc public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: { (ctx) in
             self.configMask()
             self.configViewFrames()
         }, completion: nil)
     }
     
-    override public func didReceiveMemoryWarning() {
+    @objc override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -303,7 +303,7 @@ public class KSGuideController: UIViewController {
         textLabel.frame = textRect
     }
     
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    @objc public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if currentIndex < items.count - 1 {
             currentIndex += 1
         } else {
