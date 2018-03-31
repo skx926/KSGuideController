@@ -27,7 +27,19 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         showGuides()
     }
-    
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        for button in buttons {
+            if abs(button.frame.size.width - button.frame.size.height) < 10 {
+                button.layer.cornerRadius = button.frame.size.height / 2
+                button.tag = 1
+            } else {
+                button.tag = 0
+            }
+        }
+    }
+
     @IBAction func guideButtonPressed(_ sender: UIButton) {
         showGuides()
     }
@@ -43,11 +55,11 @@ class ViewController: UIViewController {
             let text = string[..<index]
             if n % 2 == 0 {
                 // Use custom arrow image for every item, you can also set global arrow image for all items by setting the arrowImage property for a KSGuideController instance.
-                let item = KSGuideItem(sourceView: button, arrowImage: #imageLiteral(resourceName: "arrow"), text: String(text))
+                let item = KSGuideItem(sourceView: button, arrowImage: #imageLiteral(resourceName: "arrow"), text: String(text), isCircle: (button.tag == 1))
                 items.append(item)
             } else {
                 // Use default arrow image
-                let item = KSGuideItem(sourceView: button, text: String(text))
+                let item = KSGuideItem(sourceView: button, text: String(text), font: UIFont.boldSystemFont(ofSize: 20), isCircle: (button.tag == 1))
                 items.append(item)
             }
         }

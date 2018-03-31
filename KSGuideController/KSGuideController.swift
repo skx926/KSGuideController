@@ -9,17 +9,17 @@
 import UIKit
 
 @objc public class KSGuideController: UIViewController {
-    
+
     enum Region {
         case upperLeft
         case upperRight
         case lowerLeft
         case lowerRight
     }
-    
+
     public typealias CompletionBlock = (() -> Void)
     public typealias IndexChangeBlock = ((_ index: Int, _ item: KSGuideItem) -> Void)
-    
+
     private var items = [KSGuideItem]()
     @objc public var currentIndex: Int = -1 {
         didSet {
@@ -40,12 +40,12 @@ import UIKit
     private var indexWillChangeBlock: IndexChangeBlock?
     private var indexDidChangeBlock: IndexChangeBlock?
     private var guideKey: String?
-    
+
     @objc public var maskCornerRadius: CGFloat = 5
     @objc public var backgroundAlpha: CGFloat = 0.7
     @objc public var spacing: CGFloat = 20
     @objc public var padding: CGFloat = 50
-    @objc public var maskInsets = UIEdgeInsets(top: -8, left: -8, bottom: -8, right: -8)
+    @objc public var maskInsets = UIEdgeInsets(top: -4, left: -4, bottom: -4, right: -4)
     @objc public var font = UIFont.systemFont(ofSize: 14)
     @objc public var textColor = UIColor.white
     @objc public var arrowColor = UIColor.white
@@ -55,15 +55,15 @@ import UIKit
     @objc public var animatedMask = true
     @objc public var animatedText = true
     @objc public var animatedArrow = true
-    
+
     @objc public var statusBarHidden = false
-    
+
     private var maskCenter: CGPoint {
         get {
             return CGPoint(x: hollowFrame.midX, y: hollowFrame.midY)
         }
     }
-    
+
     private var region: Region {
         get {
             let center = maskCenter
@@ -79,7 +79,7 @@ import UIKit
             }
         }
     }
-    
+
     private var hollowFrame: CGRect {
         get {
             var rect: CGRect = .zero
@@ -106,13 +106,13 @@ import UIKit
             return rect
         }
     }
-    
-    
+
+
     // Give a nil key to ignore the cache logic.
     @objc public convenience init(item: KSGuideItem, key: String?) {
         self.init(items: [item], key: key)
     }
-    
+
     // Give a nil key to ignore the cache logic.
     @objc public init(items: [KSGuideItem], key: String?) {
         super.init(nibName: nil, bundle: nil)
@@ -121,7 +121,7 @@ import UIKit
         self.items.append(contentsOf: items)
         self.guideKey = key
     }
-    
+
     @objc public func show(from vc: UIViewController, completion:CompletionBlock?) {
         self.completion = completion
         if let key = guideKey {
@@ -132,44 +132,44 @@ import UIKit
             vc.present(self, animated: true, completion: nil)
         }
     }
-    
+
     @objc public func setIndexWillChangeBlock(_ block: IndexChangeBlock?) {
         indexWillChangeBlock = block
     }
-    
+
     @objc public func setIndexDidChangeBlock(_ block: IndexChangeBlock?) {
         indexDidChangeBlock = block;
     }
-    
+
     @objc required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     @objc override public func viewDidLoad() {
         super.viewDidLoad()
-        
+
         currentIndex = 0
     }
-    
+
     @objc public override var prefersStatusBarHidden: Bool {
         return statusBarHidden
     }
-    
+
     @objc public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: { (ctx) in
             self.configMask()
             self.configViewFrames()
         }, completion: nil)
     }
-    
+
     @objc override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     private func configViews() {
         view.backgroundColor = UIColor(white: 0, alpha: backgroundAlpha)
-        
+
         if let image = currentItem.arrowImage {
             arrowImageView.image = image
         } else if let image = arrowImage {
@@ -180,32 +180,36 @@ import UIKit
         arrowImageView.image = arrowImageView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         arrowImageView.tintColor = arrowColor
         view.addSubview(arrowImageView)
-        
+        self.font = currentItem.font
         textLabel.textColor = textColor
         textLabel.font = font
         textLabel.textAlignment = .left
         textLabel.text = currentItem.text
         textLabel.numberOfLines = 0
         view.addSubview(textLabel)
-        
+
         configMask()
         configViewFrames()
     }
-    
+
     private func configMask() {
         let fromPath = maskLayer.path
-        
+
         maskLayer.fillColor = UIColor.black.cgColor
         var radius = maskCornerRadius
         let frame = hollowFrame
-        radius = min(radius, min(frame.width / 2.0, frame.height / 2.0))
+        if currentItem.isCircle {
+            radius = max(frame.width / 2.0, frame.height / 2.0)
+        } else {
+            radius = min(radius, min(frame.width / 2.0, frame.height / 2.0))
+        }
         let highlightedPath = UIBezierPath(roundedRect: hollowFrame, cornerRadius: radius)
         let toPath = UIBezierPath(rect: view.bounds)
         toPath.append(highlightedPath)
         maskLayer.path = toPath.cgPath
         maskLayer.fillRule = kCAFillRuleEvenOdd
         view.layer.mask = maskLayer
-        
+
         if animatedMask {
             let animation = CABasicAnimation(keyPath: "path")
             animation.duration = animationDuration
@@ -214,10 +218,10 @@ import UIKit
             maskLayer.add(animation, forKey: nil)
         }
     }
-    
+
     private func configViewFrames() {
         maskLayer.frame = view.bounds
-        
+
         var textRect: CGRect!
         var arrowRect: CGRect!
         var transform: CGAffineTransform = .identity
@@ -226,7 +230,7 @@ import UIKit
         let size = currentItem.text.ks_size(of: font, maxWidth: maxWidth)
         let maxX = padding + maxWidth - size.width
         switch region {
-            
+
         case .upperLeft:
             transform = CGAffineTransform(scaleX: -1, y: 1)
             arrowRect = CGRect(x: hollowFrame.midX - imageSize.width / 2,
@@ -238,7 +242,7 @@ import UIKit
                               y: arrowRect.maxY + spacing,
                               width: size.width,
                               height: size.height)
-            
+
         case .upperRight:
             arrowRect = CGRect(x: hollowFrame.midX - imageSize.width / 2,
                                y: hollowFrame.maxY + spacing,
@@ -249,7 +253,7 @@ import UIKit
                               y: arrowRect.maxY + spacing,
                               width: size.width,
                               height: size.height)
-            
+
         case .lowerLeft:
             transform = CGAffineTransform(scaleX: -1, y: -1)
             arrowRect = CGRect(x: hollowFrame.midX - imageSize.width / 2,
@@ -261,7 +265,7 @@ import UIKit
                               y: arrowRect.minY - spacing - size.height,
                               width: size.width,
                               height: size.height)
-            
+
         case .lowerRight:
             transform = CGAffineTransform(scaleX: 1, y: -1)
             arrowRect = CGRect(x: hollowFrame.midX - imageSize.width / 2,
@@ -302,7 +306,7 @@ import UIKit
         arrowImageView.frame = arrowRect
         textLabel.frame = textRect
     }
-    
+
     @objc public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if currentIndex < items.count - 1 {
             currentIndex += 1
@@ -311,3 +315,4 @@ import UIKit
         }
     }
 }
+
