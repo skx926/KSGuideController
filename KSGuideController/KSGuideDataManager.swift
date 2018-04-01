@@ -23,7 +23,16 @@ import Foundation
     @objc public static func resetAll() {
         userDefaults.set(nil, forKey: dataKey)
     }
-    
+
+    @objc public static func wasShowedGuide(with key: String) -> Bool {
+        if var data = userDefaults.object(forKey: dataKey) as? [String: Bool] {
+            if let value = data[key] {
+                return value
+            }
+        }
+        return false
+    }
+
     static func shouldShowGuide(with key: String) -> Bool {
         if var data = userDefaults.object(forKey: dataKey) as? [String: Bool] {
             if let _ = data[key] {
