@@ -116,7 +116,9 @@ import UIKit
     // Give a nil key to ignore the cache logic.
     @objc public init(items: [KSGuideItem], key: String?) {
         super.init(nibName: nil, bundle: nil)
-        modalPresentationStyle = .custom
+        providesPresentationContextTransitionStyle = true
+        definesPresentationContext = true
+        modalPresentationStyle = .overCurrentContext
         modalTransitionStyle = .crossDissolve
         self.items.append(contentsOf: items)
         self.guideKey = key
